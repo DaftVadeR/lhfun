@@ -28,7 +28,7 @@ $sourceSans: "Source Sans Pro", sans-serif;
 html, body {
   font-family: $sourceSans;
   background: #FFF;
-  color: $primary-color;
+  color: $secondary-color;
 }
 
 a {
@@ -43,6 +43,7 @@ h1 {
 }
 
 h5 {
+  color: $primary-color;
   font-family: $sourceSans;
   font-size: 15px;
   font-weight: 700;
@@ -100,6 +101,13 @@ h5 {
     vertical-align: bottom;
     margin-right: $pad-sm;
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
 }
 
 ul.features, ul.features li {
@@ -209,6 +217,8 @@ ul.features {
         font-size: 24px;
         display: block;
       }
+
+      .location i {margin-right: $pad-tny}
     }
   }
 }
@@ -417,6 +427,13 @@ ul.features {
 }
 
 @media (max-width: 1199px) {
+
+  ul.features {
+    li {
+      margin: 0 $pad-tny;
+    }
+  }
+
   #main-footer {
     #footer-nav {
       .link-list {

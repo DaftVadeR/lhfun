@@ -9,7 +9,7 @@ and making use of more separate CSS files. However, time is of the essence! */
 html, body {
   font-family: "Source Sans Pro", sans-serif;
   background: #FFF;
-  color: #FF6A70; }
+  color: #464664; }
 
 a {
   color: #464664; }
@@ -22,6 +22,7 @@ h1 {
   font-weight: 300; }
 
 h5 {
+  color: #FF6A70;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 15px;
   font-weight: 700;
@@ -70,6 +71,12 @@ h5 {
     float: left;
     vertical-align: bottom;
     margin-right: 10px; }
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s; }
+
+.fade-enter, .fade-leave-to {
+  opacity: 0; }
 
 ul.features, ul.features li {
   display: inline-block;
@@ -150,6 +157,8 @@ ul.features {
       font-weight: bold;
       font-size: 24px;
       display: block; }
+    .item-grid .item-block .block-caption .location i {
+      margin-right: 6px; }
 
 /* Footer */
 #main-footer {
@@ -275,6 +284,9 @@ ul.features {
   #main-footer #footer-bot .logo {
     float: none; } }
 @media (max-width: 1199px) {
+  ul.features li {
+    margin: 0 6px; }
+
   #main-footer #footer-nav .link-list {
     margin-bottom: 34px; } }
 
