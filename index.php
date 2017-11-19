@@ -69,7 +69,7 @@
                                     </span>
                                     <span class="location">
                                         <i class="fa fa-map-marker clr-prim" aria-hidden="true"></i>
-                                        {{item.suburb}}
+                                        {{getTitleCase(item.suburb)}}
                                     </span>
                                         <ul class="features">
                                             <li>
