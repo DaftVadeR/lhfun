@@ -1,0 +1,169 @@
+/** Reader note - in a normal project, I would make this more dynamic, through the use of including Bootstrap's SASS file,
+and making use of more separate CSS files. However, time is of the essence! */
+@font-face {
+  font-family: Pluto;
+  src: url(../../fonts/PlutoBold.eot);
+  src: url(../../fonts/PlutoBold.woff2) format("woff2"), url(../../fonts/PlutoBold.woff) format("woff"), url(../../fonts/PlutoBold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+html, body {
+  font-family: "Source Sans Pro", sans-serif;
+  background: #FFF;
+  color: #FF6A70; }
+
+a {
+  color: #464664; }
+  a:hover, a:focus {
+    text-decoration: none; }
+
+h5 {
+  font-weight: bold;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 14px;
+  margin-bottom: 18px; }
+
+/* Reusables */
+.clr-prim {
+  color: #FF6A70; }
+
+.clr-sec {
+  color: #464664; }
+
+.section-pad {
+  padding: 40px 0; }
+
+.mgn-right-sm {
+  margin-right: 10px; }
+
+.mgn-right-md {
+  margin-right: 18px; }
+
+.mgn-right-lg {
+  margin-right: 40px; }
+
+.logo {
+  text-decoration: none;
+  border: none;
+  font-family: "Pluto", "Georgia", serif;
+  line-height: 30px; }
+  .logo.logo-primary .logo-text {
+    color: #FF6A70; }
+  .logo .logo-text {
+    color: #FFF;
+    text-transform: lowercase;
+    font-size: 16px;
+    margin-top: 2px;
+    display: inline-block; }
+  .logo .logo-img {
+    float: left;
+    vertical-align: bottom;
+    margin-right: 10px; }
+
+/* Header */
+#main-header, #main-content, #main-footer {
+  padding: 18px 0; }
+
+#main-header {
+  padding: 10px 0;
+  background-color: #434362;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); }
+  #main-header a {
+    color: #FFF; }
+    #main-header a:not(.btn):active, #main-header a:not(.btn):hover, #main-header a:not(.btn):focus {
+      color: #FF6A70;
+      background: transparent; }
+  #main-header #navbar {
+    float: right;
+    /* Override Bootstrap styles - wouldn't be necessary with bootstrap SASS file included */ }
+    #main-header #navbar .navbar-nav > li > .btn {
+      padding: 7px 14px; }
+    #main-header #navbar > .navbar-nav {
+      margin: 0;
+      padding: 0; }
+      #main-header #navbar > .navbar-nav .fa {
+        color: #FF6A70;
+        padding-left: 6px;
+        font-weight: normal; }
+      #main-header #navbar > .navbar-nav > li > a:not(.btn) {
+        padding: 0 18px;
+        line-height: 36px;
+        font-size: 15px;
+        font-weight: normal; }
+      #main-header #navbar > .navbar-nav .dropdown-menu a {
+        color: #FF6A70; }
+        #main-header #navbar > .navbar-nav .dropdown-menu a:hover {
+          color: #464664; }
+  #main-header .navbar-toggle {
+    margin: 0; }
+    #main-header .navbar-toggle .icon-bar {
+      background-color: #FFF; }
+
+/* Footer */
+#main-footer {
+  background: #FFF; }
+  #main-footer #footer-nav {
+    background-color: #F5F6F7; }
+    #main-footer #footer-nav .link-list {
+      list-style-type: none;
+      margin: 0;
+      padding: 0; }
+      #main-footer #footer-nav .link-list li {
+        list-style-type: none;
+        padding: 0;
+        line-height: 22px;
+        color: #464664;
+        font-size: 14px; }
+  #main-footer #footer-bot {
+    background-color: #FFF;
+    line-height: 30px;
+    /* To have the text line up with the logo despite the logo's slightly off center horizontal axis */ }
+    #main-footer #footer-bot p {
+      padding: 0;
+      margin: 0;
+      color: #464664; }
+    #main-footer #footer-bot .inline-btn-list {
+      text-align: right;
+      list-style-type: none; }
+      #main-footer #footer-bot .inline-btn-list li {
+        display: inline-block;
+        padding: 0;
+        margin: 0 10px; }
+      #main-footer #footer-bot .inline-btn-list a {
+        font-size: 20px;
+        text-decoration: none; }
+    #main-footer #footer-bot a {
+      color: #464664; }
+      #main-footer #footer-bot a:hover {
+        color: #FF6A70; }
+    #main-footer #footer-bot .logo {
+      margin-top: -2px; }
+
+/* Buttons */
+.btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  padding: 7px 14px; }
+  .btn.btn-primary {
+    border: 1px solid transparent;
+    /* To match up button sizes */
+    background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%); }
+    .btn.btn-primary:hover {
+      background: linear-gradient(180deg, #ff8084 0%, #ff5354 100%); }
+  .btn.btn-border {
+    background: transparent;
+    color: #FFF;
+    border: 1px solid #FFF; }
+    .btn.btn-border:hover {
+      background: rgba(255, 255, 255, 0.1); }
+
+/* Responsiveness */
+@media (max-width: 767px) {
+  #navbar {
+    width: 100%;
+    float: none; } }
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+
+/*# sourceMappingURL=app.css.map */

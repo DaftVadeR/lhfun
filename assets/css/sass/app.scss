@@ -1,0 +1,249 @@
+/** Reader note - in a normal project, I would make this more dynamic, through the use of including Bootstrap's SASS file,
+and making use of more separate CSS files. However, time is of the essence! */
+
+$pad-tny: 6px;
+$pad-sm: 10px;
+$pad-md: 18px;
+$pad-lg: 40px;
+
+$btn-xpad: 14px;
+$btn-ypad: 7px;
+
+$primary-color: #FF6A70;
+$secondary-color: #464664;
+
+$white: #FFF;
+$black: #000;
+
+$subtle-grey: #F5F6F7;
+
+$pluto: 'Pluto', 'Georgia', serif;
+$sourceSans: "Source Sans Pro", sans-serif;
+
+@font-face{font-family:Pluto;src:url(../../fonts/PlutoBold.eot);src:url(../../fonts/PlutoBold.woff2) format("woff2"),url(../../fonts/PlutoBold.woff) format("woff"),url(../../fonts/PlutoBold.ttf) format("truetype");font-weight:700;font-style:normal}
+
+html, body {
+  font-family: $sourceSans;
+  background: #FFF;
+  color: $primary-color;
+}
+
+a {
+  color: $secondary-color;
+  &:hover, &:focus {text-decoration: none;}
+}
+
+h1 {
+
+}
+
+h5 {
+  font-weight: bold;
+  font-family: $sourceSans;
+  font-size: 14px;
+  margin-bottom: $pad-md;
+}
+
+/* Reusables */
+
+.clr-prim {
+  color: $primary-color;
+}
+.clr-sec {
+  color: $secondary-color;
+}
+.section-pad {
+  padding: $pad-lg 0;
+}
+
+.mgn-right-sm {
+  margin-right: $pad-sm;
+}
+.mgn-right-md {
+  margin-right: $pad-md;
+}
+.mgn-right-lg {
+  margin-right: $pad-lg;
+}
+
+.logo {
+  text-decoration: none;
+  border: none;
+  font-family: $pluto;
+  line-height: 30px;
+
+  &.logo-primary .logo-text {
+    color: $primary-color;
+  }
+
+  .logo-text {
+    color: $white;
+    text-transform: lowercase;
+    font-size: 16px;
+    margin-top: 2px;
+    display: inline-block;
+  }
+  .logo-img {
+    float: left;
+    vertical-align: bottom;
+    margin-right: $pad-sm;
+  }
+}
+
+/* Header */
+
+#main-header, #main-content, #main-footer {
+  padding:$pad-md 0;
+}
+
+#main-header {
+  padding:$pad-sm 0;
+  background-color: #434362;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+
+  a {
+    color: $white;
+
+    &:not(.btn) {
+      &:active, &:hover, &:focus {
+        color: $primary-color;
+        background: transparent;
+      }
+    }
+  }
+
+  #navbar {
+    float:right;
+
+    .navbar-nav > li > .btn { padding: $btn-ypad $btn-xpad; } /* Override Bootstrap styles - wouldn't be necessary with bootstrap SASS file included */
+
+    & > .navbar-nav {
+      margin: 0;
+      padding: 0;
+
+      .fa { color: $primary-color; padding-left: $pad-tny; font-weight: normal }
+
+      & > li > a:not(.btn) {
+        padding: 0 $pad-md; line-height: 36px; font-size: 15px; font-weight: normal;
+      }
+
+      .dropdown-menu {
+        a {
+          color: $primary-color;
+          &:hover {color: $secondary-color}
+        }
+      }
+    }
+  }
+
+  .navbar-toggle {
+    margin: 0;
+
+    .icon-bar {background-color: $white;}
+  }
+}
+
+/* Footer */
+
+#main-footer {
+  background: $white;
+
+  #footer-nav {
+    background-color: $subtle-grey;
+
+    .link-list {
+      list-style-type: none;
+      margin: 0; padding: 0;
+
+      li {
+        list-style-type: none;
+        padding: 0;
+        line-height: 22px;
+        color: $secondary-color;
+        font-size: 14px;
+
+        a {  }
+      }
+    }
+  }
+
+  #footer-bot {
+    background-color: $white;
+    line-height: 30px;
+
+    p {padding: 0; margin: 0; color: $secondary-color}
+
+    .inline-btn-list {
+      text-align: right;
+      list-style-type: none;
+
+      li { display: inline-block; padding: 0; margin: 0 $pad-sm; }
+      a {
+        font-size: 20px;
+        text-decoration: none;
+      }
+    }
+
+    a {
+      color: $secondary-color;
+      &:hover {
+        color: $primary-color;
+      }
+    }
+
+    /* To have the text line up with the logo despite the logo's slightly off center horizontal axis */
+    .logo {
+      margin-top: -2px;
+    }
+  }
+}
+
+/* Buttons */
+
+.btn {
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+
+  padding: $btn-ypad $btn-xpad;
+
+  &.btn-primary {
+    border: 1px solid transparent; /* To match up button sizes */
+    background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%);
+
+    &:hover {
+      background: linear-gradient(180deg, #ff8084 0%, #ff5354 100%);
+    }
+  }
+
+  &.btn-border {
+    background: transparent;
+    color: $white;
+    border: 1px solid $white;
+
+    &:hover {
+      background: rgba(255,255,255,0.1);
+    }
+  }
+}
+
+/* Responsiveness */
+
+@media (max-width: 767px) {
+  #navbar {width: 100%; float: none}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
