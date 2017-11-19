@@ -16,11 +16,17 @@ a {
   a:hover, a:focus {
     text-decoration: none; }
 
+h1 {
+  font-size: 30px;
+  color: #464664;
+  font-weight: 300; }
+
 h5 {
-  font-weight: bold;
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 14px;
-  margin-bottom: 18px; }
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  line-height: 18px; }
 
 /* Reusables */
 .clr-prim {
@@ -28,6 +34,12 @@ h5 {
 
 .clr-sec {
   color: #464664; }
+
+.clr-sgrey {
+  color: #F5F6F7; }
+
+.clr-indigo {
+  color: #babad4; }
 
 .section-pad {
   padding: 40px 0; }
@@ -58,6 +70,20 @@ h5 {
     float: left;
     vertical-align: bottom;
     margin-right: 10px; }
+
+ul.features, ul.features li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style-type: none; }
+
+ul.features {
+  overflow: hidden;
+  float: right; }
+  ul.features li {
+    margin: 0 10px; }
+    ul.features li .count {
+      padding-left: 2px; }
 
 /* Header */
 #main-header, #main-content, #main-footer {
@@ -97,6 +123,33 @@ h5 {
     margin: 0; }
     #main-header .navbar-toggle .icon-bar {
       background-color: #FFF; }
+  #main-header .nav-btn {
+    margin-left: 10px; }
+
+/* Content */
+.item-grid .item-block {
+  /* Excuse my not using mixins for stuff like this */
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 18px; }
+  .item-grid .item-block .block-img {
+    width: 100%; }
+  .item-grid .item-block .block-caption {
+    line-height: 34px;
+    padding: 6px 18px;
+    position: relative; }
+    .item-grid .item-block .block-caption .price {
+      position: absolute;
+      color: #FFF;
+      top: -100%;
+      left: auto;
+      line-height: 34px;
+      font-weight: bold;
+      font-size: 24px;
+      display: block; }
 
 /* Footer */
 #main-footer {
@@ -113,7 +166,10 @@ h5 {
         line-height: 22px;
         color: #464664;
         font-size: 14px; }
+        #main-footer #footer-nav .link-list li a:hover {
+          color: #FF6A70; }
   #main-footer #footer-bot {
+    position: relative;
     background-color: #FFF;
     line-height: 30px;
     /* To have the text line up with the logo despite the logo's slightly off center horizontal axis */ }
@@ -122,6 +178,8 @@ h5 {
       margin: 0;
       color: #464664; }
     #main-footer #footer-bot .inline-btn-list {
+      padding: 0;
+      margin: 0 70px 0 0;
       text-align: right;
       list-style-type: none; }
       #main-footer #footer-bot .inline-btn-list li {
@@ -136,7 +194,26 @@ h5 {
       #main-footer #footer-bot a:hover {
         color: #FF6A70; }
     #main-footer #footer-bot .logo {
+      float: left;
+      margin: 0 40px 0 0;
       margin-top: -2px; }
+    #main-footer #footer-bot .back-to-top {
+      float: right;
+      display: inline-block;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+      border-radius: 30px;
+      background-color: #FF6A70;
+      color: #FFF;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      line-height: 48px; }
+      #main-footer #footer-bot .back-to-top:hover {
+        background-color: #464664;
+        color: #FFF;
+        transition: 0.3s; }
 
 /* Buttons */
 .btn {
@@ -159,11 +236,46 @@ h5 {
 
 /* Responsiveness */
 @media (max-width: 767px) {
-  #navbar {
+  #main-header .nav-btn {
+    margin-left: 0;
+    margin-bottom: 6px; }
+  #main-header #navbar {
     width: 100%;
+    float: none; }
+    #main-header #navbar > .navbar-nav .dropdown-menu a:hover {
+      color: #FFF; }
+
+  .item-grid .item-block {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto; }
+
+  #main-footer {
+    text-align: center; }
+    #main-footer #footer-bot .inline-btn-list {
+      margin-top: 34px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      text-align: center; }
+    #main-footer #footer-bot .logo {
+      display: inline-block;
+      margin: 0 auto;
+      float: left;
+      width: auto; }
+    #main-footer #footer-bot .back-to-top {
+      text-align: center;
+      margin-top: 34px;
+      display: inline-block;
+      float: none; } }
+@media (max-width: 991px) {
+  #main-header #navbar > .navbar-nav > li > a:not(.btn) {
+    padding: 0 6px; }
+
+  #main-footer #footer-bot .logo {
     float: none; } }
-/* Small devices (tablets, 768px and up) */
-/* Medium devices (desktops, 992px and up) */
-/* Large devices (large desktops, 1200px and up) */
+@media (max-width: 1199px) {
+  #main-footer #footer-nav .link-list {
+    margin-bottom: 34px; } }
 
 /*# sourceMappingURL=app.css.map */
