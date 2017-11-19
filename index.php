@@ -110,7 +110,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="assets/js/vue-spinner.min.js"></script>
 
-
 <script src="assets/js/app.js"></script>
 </body>
 </html>
