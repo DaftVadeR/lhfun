@@ -33,7 +33,7 @@
                                 <input type="text" class="form-control" id="search-term" placeholder="Add suburb or reference number...">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Transfer cash</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </form>
                 </div>
                 <div class="col-sm-4">
