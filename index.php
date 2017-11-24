@@ -3,12 +3,16 @@
 <head>
     <meta charset="utf-8">
     <title>Leadhome - Search Properties</title>
+    <link  rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
+    <link  rel="icon" href="assets/img/favicon.ico" type="image/x-icon"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/public/app.css">
 
     <base href="http://localhost/leadhome/" />
@@ -17,60 +21,58 @@
 <?php include('inc/header.php');?>
 <section id="main-content" class="section-pad">
     <div class="container-fluid">
+        <h1>Search Properties</h1>
         <div id="search-app">
-            <h1>Search Properties</h1>
-
-            <div class="row hidden">
-                <div class="col-sm-8">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <label class="sr-only" for="search-term">Property Search</label>
-                            <div class="input-group">
-                                <select name="search-type">
+            <div class="row mb-md-2">
+                <div class="col-lg-9 col-md-8 col-sm-7">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <select name="search-type" id="search-type" class="form-control">
                                     <option value="sale">For Sale</option>
                                     <option value="rent">For Rent</option>
                                 </select>
-                                <input type="text" class="form-control" id="search-term" placeholder="Add suburb or reference number...">
-                            </div>
+                            </span>
+
+                            <input id="search-terms" type="text" name="search-terms" class="form-control" placeholder="Search for...">
                         </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
                     </form>
                 </div>
-                <div class="col-sm-4">
-                    <div class="map-search-btn input-field ">
-                    <span class="btn-left text-white">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        Map Search
-                    </span>
-                    <span class="btn-right text-dark">
-                        Discover new areas
-                    </span>
-                    </div>
+                <div class="col-lg-3 col-md-4 col-sm-5">
+                    <a class="map-search-btn align" href="#">
+                        <span class="btn-left red-grad">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            Map Search
+                        </span>
+                        <span class="btn-right">
+                            Discover new areas
+                        </span>
+                    </a>
                 </div>
             </div>
 
             <div id="search-options">
             </div>
 
-            <div id="search-results" class="item-grid">
+            <div id="search-results" class="item-grid" v-cloak>
                 <dot-loader :loading="!vueReady || searchResults.length == 0" :color="'#FF6A70'" :size="50"></dot-loader>
                 <div>
                 <transition name="fade">
                     <div class="results-inner" v-if="vueReady && searchResults.length > 0">
                         <div class="row">
                             <div class="col-sm-6 col-md-4" v-for="item in searchResults">
-                                <div class="item-block">
-
-                                    <img v-bind:src="item.images.length > 0 ? item.images[0].small : 'assets/img/properties/1.png'" alt="Home 1" class="block-img" />
+                                <a class="item-block" href="http://leadhome.co.za/property/{{ item.id }}">
+                                    <img v-bind:src="item.images.length > 0
+                                     ? item.images[0].small : 'assets/img/properties/default.jpg'" alt="Home 1" class="block-img" />
 
                                     <div class="block-caption">
-                                    <span class="price">
-                                        R{{item.price}}
-                                    </span>
-                                    <span class="location">
-                                        <i class="fa fa-map-marker clr-prim" aria-hidden="true"></i>
-                                        {{getTitleCase(item.suburb)}}
-                                    </span>
+                                        <span class="price">
+                                            R{{item.price}}
+                                        </span>
+                                        <span class="location">
+                                            <i class="fa fa-map-marker clr-prim" aria-hidden="true"></i>
+                                            {{getTitleCase(item.suburb)}}
+                                        </span>
                                         <ul class="features">
                                             <li>
                                                 <span class="sr-only">Bedrooms</span>
@@ -89,7 +91,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                         <a href="#" class="btn btn-primary btn-block" v-on:click="loadNextPage" v-show="resultsPage > 1">
@@ -104,8 +106,10 @@
 </section>
 <?php include('inc/footer.php');?>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="assets/js/vue-spinner.min.js"></script>

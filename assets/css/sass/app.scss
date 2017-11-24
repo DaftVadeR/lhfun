@@ -12,6 +12,7 @@ $btn-ypad: 7px;
 
 $primary-color: #FF6A70;
 $secondary-color: #464664;
+$light-secodary-color: #5B5778;
 
 $indigo: #babad4;
 
@@ -22,6 +23,9 @@ $subtle-grey: #F5F6F7;
 
 $pluto: 'Pluto', 'Georgia', serif;
 $sourceSans: "Source Sans Pro", sans-serif;
+
+$search-bar-height: 38px;
+$hover-gradient: linear-gradient(180deg, #ff8084 0%, #ff5354 100%);
 
 @font-face{font-family:Pluto;src:url(../../fonts/PlutoBold.eot);src:url(../../fonts/PlutoBold.woff2) format("woff2"),url(../../fonts/PlutoBold.woff) format("woff"),url(../../fonts/PlutoBold.ttf) format("truetype");font-weight:700;font-style:normal}
 
@@ -52,6 +56,9 @@ h5 {
 }
 
 /* Reusables */
+@mixin red-gradient {
+  background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%)
+}
 
 .clr-prim {
   color: $primary-color;
@@ -127,14 +134,18 @@ ul.features {
   }
 }
 
+[v-cloak] {
+  display: none;
+}
+
 /* Header */
 
-#main-header, #main-content, #main-footer {
+#main-content, #main-footer {
   padding:$pad-md 0;
 }
 
 #main-header {
-  padding:$pad-sm 0;
+  padding: 0;
   background-color: #434362;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 
@@ -147,6 +158,11 @@ ul.features {
         background: transparent;
       }
     }
+  }
+
+  #navbar-cont {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   #navbar {
@@ -188,6 +204,10 @@ ul.features {
 
 .item-grid {
   .item-block {
+    display: block;
+    color: $secondary-color;
+    overflow:hidden;
+
     /* Excuse my not using mixins for stuff like this */
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
@@ -206,6 +226,9 @@ ul.features {
       line-height: 34px;
       padding: $pad-tny $pad-md;
       position: relative;
+      -webkit-box-shadow: $pad-tny 0 40px  5px rgba(70,70,100,1);
+      -moz-box-shadow: $pad-tny 0 40px 5px rgba(70,70,100,1);
+      box-shadow: $pad-tny 0 40px 5px rgba(70,70,100,1);
 
       .price {
         position: absolute;
@@ -216,6 +239,7 @@ ul.features {
         font-weight: bold;
         font-size: 24px;
         display: block;
+        text-shadow: 1px 1px 1px $secondary-color;
       }
 
       .location i {margin-right: $pad-tny}
@@ -307,7 +331,42 @@ ul.features {
   }
 }
 
-/* Buttons */
+/* Search */
+
+#search-form {
+  margin-bottom: $pad-mlg;
+  overflow: hidden;
+  height: $search-bar-height;
+  line-height:38px;
+
+  #search-type {
+    -webkit-border-top-right-radius:0;
+    -webkit-border-bottom-right-radius:0;
+
+    -moz-border-radius-topright:0;
+    -moz-border-radius-bottomright:0;
+
+    border-bottom-right-radius:0;
+    border-top-right-radius:0;
+  }
+}
+
+.form-control:focus {
+  color: $primary-color;
+  background-color: #fff;
+  border-color: $primary-color;
+  outline: 0;
+  box-shadow: none;
+  -webkit-transition: border-color 0.4s;
+  -moz-transition: border-color 0.4s;
+  -ms-transition: border-color 0.4s;
+  -o-transition: border-color 0.4s;
+  transition: border-color 0.4s;
+}
+
+.btn, .red-grad {
+  @include red-gradient;
+}
 
 .btn {
   -webkit-border-radius:3px;
@@ -318,10 +377,9 @@ ul.features {
 
   &.btn-primary {
     border: 1px solid transparent; /* To match up button sizes */
-    background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%);
 
     &:hover {
-      background: linear-gradient(180deg, #ff8084 0%, #ff5354 100%);
+      background: $hover-gradient;
     }
   }
 
@@ -333,6 +391,67 @@ ul.features {
     &:hover {
       background: rgba(255,255,255,0.1);
     }
+  }
+}
+
+.map-search-btn {
+  height: $search-bar-height;
+  line-height:38px;
+  display: block;
+  width: 100%; float:right;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  overflow: hidden;
+
+  &:hover {
+    background: $hover-gradient;
+    .btn-left, .btn-right {
+      background: none;
+    }
+    .btn-left {
+      width: 100%;
+      -webkit-transition: width 0.2s;
+      -moz-transition: width 0.2s;
+      -ms-transition: width 0.2s;
+      -o-transition: width 0.2s;
+      transition: width 0.2s;
+
+      &::after {
+        display: inline-block;
+        padding-left: $pad-tny;
+        content: '\bb';
+        font-size: 17px;
+        font-weight: 700;
+        color: $white;
+      }
+    }
+    .btn-right {
+      display: none;
+    }
+  }
+
+  .btn-left, .btn-right {
+    line-height:38px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 14px; text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    float:left
+  }
+  .btn-left {
+    width: 50%;
+    color: $white;
+    .fa {
+      margin-right: $pad-tny;
+    }
+  }
+  .btn-right {
+    color: $secondary-color;
+    width: 50%;
+    background: url('../../img/map-btn-bg.jpg');
   }
 }
 

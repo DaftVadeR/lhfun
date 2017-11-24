@@ -8,12 +8,22 @@ var vapp = new Vue({
     data: {
         searchResults:[],
         resultsPage:1,
-        vueReady:true
+        vueReady:true,
+        searchApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/suburbs',
+        propertiesApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/properties'
     },
     created: function(){
         this.getNewResults();
     },
     methods: {
+        getPropertiesNextPageUrl: function () {
+            var vm = this;
+            return vm.propertiesApiUrl + '/?page=' + vm.resultsPage;
+        },
+        getSearchUrl: function (searchTerm) {
+            var vm = this;
+            return vm.searchApiUrl + '/?query=' + searchTerm;
+        },
         getTitleCase: function(str) {
             var words = str.split(" ");
             var newStr = "";
@@ -37,7 +47,7 @@ var vapp = new Vue({
             var vm = this;
             window.scrollTo(0, 0);
 
-            axios.get('https://lh-silver-api-staging.leadhome.co.za/api/properties?page='+vm.resultsPage)
+            axios.get(this.getPropertiesNextPageUrl())
                 .then(function (response) {
                     console.log(response.data.items.length+' items retrieved');
                     if (response.hasOwnProperty("data") &&

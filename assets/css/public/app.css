@@ -92,12 +92,15 @@ ul.features {
     ul.features li .count {
       padding-left: 2px; }
 
+[v-cloak] {
+  display: none; }
+
 /* Header */
-#main-header, #main-content, #main-footer {
+#main-content, #main-footer {
   padding: 18px 0; }
 
 #main-header {
-  padding: 10px 0;
+  padding: 0;
   background-color: #434362;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); }
   #main-header a {
@@ -105,6 +108,9 @@ ul.features {
     #main-header a:not(.btn):active, #main-header a:not(.btn):hover, #main-header a:not(.btn):focus {
       color: #FF6A70;
       background: transparent; }
+  #main-header #navbar-cont {
+    padding-left: 0;
+    padding-right: 0; }
   #main-header #navbar {
     float: right;
     /* Override Bootstrap styles - wouldn't be necessary with bootstrap SASS file included */ }
@@ -135,6 +141,9 @@ ul.features {
 
 /* Content */
 .item-grid .item-block {
+  display: block;
+  color: #464664;
+  overflow: hidden;
   /* Excuse my not using mixins for stuff like this */
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -147,7 +156,10 @@ ul.features {
   .item-grid .item-block .block-caption {
     line-height: 34px;
     padding: 6px 18px;
-    position: relative; }
+    position: relative;
+    -webkit-box-shadow: 6px 0 40px 5px #464664;
+    -moz-box-shadow: 6px 0 40px 5px #464664;
+    box-shadow: 6px 0 40px 5px #464664; }
     .item-grid .item-block .block-caption .price {
       position: absolute;
       color: #FFF;
@@ -156,7 +168,8 @@ ul.features {
       line-height: 34px;
       font-weight: bold;
       font-size: 24px;
-      display: block; }
+      display: block;
+      text-shadow: 1px 1px 1px #464664; }
     .item-grid .item-block .block-caption .location i {
       margin-right: 6px; }
 
@@ -224,7 +237,35 @@ ul.features {
         color: #FFF;
         transition: 0.3s; }
 
-/* Buttons */
+/* Search */
+#search-form {
+  margin-bottom: 34px;
+  overflow: hidden;
+  height: 38px;
+  line-height: 38px; }
+  #search-form #search-type {
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
+
+.form-control:focus {
+  color: #FF6A70;
+  background-color: #fff;
+  border-color: #FF6A70;
+  outline: 0;
+  box-shadow: none;
+  -webkit-transition: border-color 0.4s;
+  -moz-transition: border-color 0.4s;
+  -ms-transition: border-color 0.4s;
+  -o-transition: border-color 0.4s;
+  transition: border-color 0.4s; }
+
+.btn, .red-grad {
+  background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%); }
+
 .btn {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -232,8 +273,7 @@ ul.features {
   padding: 7px 14px; }
   .btn.btn-primary {
     border: 1px solid transparent;
-    /* To match up button sizes */
-    background: linear-gradient(180deg, #FF8F93 0%, #FF767B 100%); }
+    /* To match up button sizes */ }
     .btn.btn-primary:hover {
       background: linear-gradient(180deg, #ff8084 0%, #ff5354 100%); }
   .btn.btn-border {
@@ -242,6 +282,56 @@ ul.features {
     border: 1px solid #FFF; }
     .btn.btn-border:hover {
       background: rgba(255, 255, 255, 0.1); }
+
+.map-search-btn {
+  height: 38px;
+  line-height: 38px;
+  display: block;
+  width: 100%;
+  float: right;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  overflow: hidden; }
+  .map-search-btn:hover {
+    background: linear-gradient(180deg, #ff8084 0%, #ff5354 100%); }
+    .map-search-btn:hover .btn-left, .map-search-btn:hover .btn-right {
+      background: none; }
+    .map-search-btn:hover .btn-left {
+      width: 100%;
+      -webkit-transition: width 0.2s;
+      -moz-transition: width 0.2s;
+      -ms-transition: width 0.2s;
+      -o-transition: width 0.2s;
+      transition: width 0.2s; }
+      .map-search-btn:hover .btn-left::after {
+        display: inline-block;
+        padding-left: 6px;
+        content: '\bb';
+        font-size: 17px;
+        font-weight: 700;
+        color: #FFF; }
+    .map-search-btn:hover .btn-right {
+      display: none; }
+  .map-search-btn .btn-left, .map-search-btn .btn-right {
+    line-height: 38px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+    display: block;
+    float: left; }
+  .map-search-btn .btn-left {
+    width: 50%;
+    color: #FFF; }
+    .map-search-btn .btn-left .fa {
+      margin-right: 6px; }
+  .map-search-btn .btn-right {
+    color: #464664;
+    width: 50%;
+    background: url("../../img/map-btn-bg.jpg"); }
 
 /* Responsiveness */
 @media (max-width: 767px) {
