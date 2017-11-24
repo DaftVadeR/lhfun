@@ -1,3 +1,6 @@
-.sass-cache
-.idea
-package-log.json
+/.sass-cache
+/.idea
+/vendor
+/node_modules
+npm-debug.log
+.env
