@@ -22,9 +22,9 @@
 <section id="main-content" class="section-pad">
     <div class="container-fluid">
         <h1>Search Properties</h1>
-        <div id="search-app">
-            <div class="row mb-md-2">
-                <div class="col-lg-9 col-md-8 col-sm-7">
+        <div>
+            <div class="row mb-md-2" id="search-app">
+                <div class="col-xl-8 col-lg-7">
                     <form id="search-form">
                         <div class="input-group">
                             <span class="input-group-btn">
@@ -38,7 +38,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-5">
+                <div class="col-xl-4 col-lg-5 d-none d-lg-block">
                     <a class="map-search-btn align" href="#">
                         <span class="btn-left red-grad">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -61,7 +61,7 @@
                     <div class="results-inner" v-if="vueReady && searchResults.length > 0">
                         <div class="row">
                             <div class="col-sm-6 col-md-4" v-for="item in searchResults">
-                                <a class="item-block" href="http://leadhome.co.za/property/{{ item.id }}">
+                                <a class="item-block" v-bind:href="getItemUrl(item)">
                                     <img v-bind:src="item.images.length > 0
                                      ? item.images[0].small : 'assets/img/properties/default.jpg'" alt="Home 1" class="block-img" />
 
@@ -91,6 +91,7 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <div class="overlay"><span class="btn btn-primary">View property &raquo;</span></div>
                                 </a>
                             </div>
                         </div>

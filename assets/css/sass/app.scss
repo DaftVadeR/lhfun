@@ -18,6 +18,7 @@ $indigo: #babad4;
 
 $white: #FFF;
 $black: #000;
+$grey: #333;
 
 $subtle-grey: #F5F6F7;
 
@@ -204,6 +205,9 @@ ul.features {
 
 .item-grid {
   .item-block {
+    background-color: $white;
+
+    position: relative;
     display: block;
     color: $secondary-color;
     overflow:hidden;
@@ -213,22 +217,58 @@ ul.features {
     -moz-border-radius:3px;
     border-radius:3px;
 
-    background-color: #FFFFFF;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2), 0 1px 3px 0 rgba(0,0,0,0.1);
 
     margin-bottom: $pad-md;
 
-    .block-img {
+    &:hover {
+      .overlay {
+        display: flex;
+      }
+    }
+
+    .overlay {
+      display: none;
+      justify-content: center;
+      align-content:center;
+      flex: 1;
+      color: $white;
+      font-weight: bold;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
       width: 100%;
+      background: rgba(70,70,100,0.1);
+
+      .btn {
+        display: inline-block;
+        margin: auto;
+      }
+    }
+
+    .block-img {
+      -webkit-backface-visibility: hidden;
+      -webkit-transform: translateZ(0) scale(1.0, 1.0);
+      transform: translateZ(0);
+
+      border: none;
+      outline: none;
+      width: 100%;
+      display: block;
     }
 
     .block-caption {
+      background-color: $white;
       line-height: 34px;
       padding: $pad-tny $pad-md;
       position: relative;
-      -webkit-box-shadow: $pad-tny 0 40px  5px rgba(70,70,100,1);
-      -moz-box-shadow: $pad-tny 0 40px 5px rgba(70,70,100,1);
-      box-shadow: $pad-tny 0 40px 5px rgba(70,70,100,1);
+      -webkit-box-shadow: $pad-tny 0 40px  5px $grey;
+      -moz-box-shadow: $pad-tny 0 40px 5px $grey;
+      box-shadow: $pad-tny 0 40px 5px $grey;
 
       .price {
         position: absolute;
@@ -380,6 +420,11 @@ ul.features {
 
     &:hover {
       background: $hover-gradient;
+      -webkit-transition: background 0.2s;
+      -moz-transition: background 0.2s;
+      -ms-transition: background 0.2s;
+      -o-transition: background 0.2s;
+      transition: background 0.2s;
     }
   }
 
@@ -403,28 +448,19 @@ ul.features {
   -moz-border-radius:3px;
   border-radius:3px;
   overflow: hidden;
+  background: url('../../img/map-btn-bg.jpg');
 
   &:hover {
-    background: $hover-gradient;
-    .btn-left, .btn-right {
-      background: none;
-    }
     .btn-left {
+      float:none;
+      box-sizing: border-box;
       width: 100%;
+      margin-right: 38px;
       -webkit-transition: width 0.2s;
       -moz-transition: width 0.2s;
       -ms-transition: width 0.2s;
       -o-transition: width 0.2s;
       transition: width 0.2s;
-
-      &::after {
-        display: inline-block;
-        padding-left: $pad-tny;
-        content: '\bb';
-        font-size: 17px;
-        font-weight: 700;
-        color: $white;
-      }
     }
     .btn-right {
       display: none;
@@ -432,27 +468,59 @@ ul.features {
   }
 
   .btn-left, .btn-right {
-    line-height:38px;
-    padding: 0 10px;
-    box-sizing: border-box;
-    font-size: 14px; text-align: center;
+    font-size: 14px;
     font-weight: 700;
-    cursor: pointer;
     display: block;
-    float:left
+    float:left;
+    padding: 0 $pad-tny;
+    text-align: center;
   }
   .btn-left {
-    width: 50%;
+    width: 40%;
+    position: relative;
+    background: #FF6A70;
     color: $white;
-    .fa {
-      margin-right: $pad-tny;
+    padding: 0 $pad-tny;
+
+    &::after {
+      left: 100%;
+      top: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(255, 106, 112, 0);
+      border-left-color: #FF6A70;
+      border-width: 38px;
+      margin-top: -38px;
     }
   }
   .btn-right {
-    color: $secondary-color;
-    width: 50%;
-    background: url('../../img/map-btn-bg.jpg');
+    width: 60%;
+    color: $secondary-color
   }
+}
+
+.arrow_box {
+  width: 100px;
+  position: relative;
+  background: #FF6A70;
+}
+.arrow_box:after {
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(255, 106, 112, 0);
+  border-left-color: #FF6A70;
+  border-width: 88px;
+  margin-top: -88px;
 }
 
 /* Responsiveness */
