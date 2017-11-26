@@ -22,6 +22,8 @@ $grey: #333;
 
 $subtle-grey: #F5F6F7;
 
+$control-border-color: #ced4da;
+
 $pluto: 'Pluto', 'Georgia', serif;
 $sourceSans: "Source Sans Pro", sans-serif;
 
@@ -375,11 +377,64 @@ ul.features {
 
 #search-form {
   margin-bottom: $pad-mlg;
-  overflow: hidden;
   height: $search-bar-height;
   line-height:38px;
+  position: relative;
+
+  #search-terms-cont {
+    position: relative;
+    #search-terms {
+      &.has-suggestions {
+        -webkit-border-top-right-radius:0;
+        -webkit-border-bottom-right-radius:0;
+
+        -moz-border-radius-topright:0;
+        -moz-border-radius-bottomright:0;
+
+        border-bottom-right-radius:0;
+        border-top-right-radius:0;
+      }
+
+      -webkit-border-top-left-radius:0;
+      -webkit-border-bottom-left-radius:0;
+
+      -moz-border-radius-topleft:0;
+      -moz-border-radius-bottomleft:0;
+
+      border-bottom-left-radius:0;
+      border-top-left-radius:0;
+
+      -webkit-border-top-right-radius:.25rem;
+      -webkit-border-bottom-right-radius:.25rem;
+
+      -moz-border-radius-topright:.25rem;
+      -moz-border-radius-bottomright:.25rem;
+
+      border-bottom-right-radius:.25rem;
+      border-top-right-radius:.25rem;
+
+      padding-left: $pad-mlg;
+      box-sizing: content-box;
+    }
+    .fa {
+      position: absolute;
+      left: $pad-sm;
+      top: 50%;
+      margin-top: -8px;
+      z-index: 99;
+      color: $primary-color;
+    }
+  }
 
   #search-type {
+    width: 150px;
+
+    &.has-suggestions {
+      -webkit-border-bottom-left-radius:0;
+      -moz-border-radius-bottomleft:0;
+      border-bottom-left-radius:0;
+    }
+
     -webkit-border-top-right-radius:0;
     -webkit-border-bottom-right-radius:0;
 
@@ -389,12 +444,47 @@ ul.features {
     border-bottom-right-radius:0;
     border-top-right-radius:0;
   }
+
+  #search-suggestions {
+    z-index: 99;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: $white;
+
+    &, li {
+      margin: 0; padding: 0;
+      list-style-type: none;
+    }
+
+    li {
+      border: 1px solid $control-border-color;
+      border-top: 0;
+      cursor:pointer;
+      color: $secondary-color;
+      padding: 0 $pad-sm;
+      line-height: 34px;
+
+      &:last-child {
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: .25rem;
+        -moz-border-radius-bottomright: .25rem;
+        -moz-border-radius-bottomleft: .25rem;
+        -webkit-border-bottom-right-radius: .25rem;
+        -webkit-border-bottom-left-radius: .25rem;
+      }
+
+      &:hover {
+        background: $subtle-grey;
+      }
+    }
+  }
 }
 
 .form-control:focus {
-  color: $primary-color;
   background-color: #fff;
-  border-color: $primary-color;
+  border-color: $control-border-color;
   outline: 0;
   box-shadow: none;
   -webkit-transition: border-color 0.4s;

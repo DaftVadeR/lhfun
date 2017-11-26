@@ -8,7 +8,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!--    <link rel="stylesheet" href="assets/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700,900" rel="stylesheet">
 
@@ -22,20 +21,36 @@
 <section id="main-content" class="section-pad">
     <div class="container-fluid">
         <h1>Search Properties</h1>
-        <div>
-            <div class="row mb-md-2" id="search-app">
+        <div id="search-app" v-cloak>
+            <div class="row mb-md-2">
                 <div class="col-xl-8 col-lg-7">
                     <form id="search-form">
                         <div class="input-group">
                             <span class="input-group-btn">
-                                <select name="search-type" id="search-type" class="form-control">
+                                <select name="search-type" id="search-type" class="form-control" :class="searchString.length == 0 ? '' : 'has-suggestions'">
                                     <option value="sale">For Sale</option>
                                     <option value="rent">For Rent</option>
                                 </select>
                             </span>
-
-                            <input id="search-terms" type="text" name="search-terms" class="form-control" placeholder="Search for...">
+                            <div class="input-group" id="search-terms-cont">
+                                <input id="search-terms"
+                                       v-on:keyup="checkSearchTerms"
+                                       v-model="searchString"
+                                       v-on:focus="setSearchActive(true)"
+                                       v-on:blur="setSearchActive(false)"
+                                       type="text"
+                                       name="search-terms"
+                                       class="form-control"
+                                       :class="searchString.length == 0 ? '' : 'has-suggestions'"
+                                       placeholder="Add suburb or reference number...">
+                                <i class="fa fa-search"></i>
+                            </div>
                         </div>
+                        <ul id="search-suggestions"
+                            v-if="searchActive && searchTermResults.length > 0"
+                            >
+                            <li v-for="item in searchTermResults" v-on:click="selectSearchSuggestion">{{ item }}</li>
+                        </ul>
                     </form>
                 </div>
                 <div class="col-xl-4 col-lg-5 d-none d-lg-block">
@@ -54,7 +69,7 @@
             <div id="search-options">
             </div>
 
-            <div id="search-results" class="item-grid" v-cloak>
+            <div id="properties" class="item-grid">
                 <dot-loader :loading="!vueReady || searchResults.length == 0" :color="'#FF6A70'" :size="50"></dot-loader>
                 <div>
                 <transition name="fade">
@@ -115,6 +130,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="assets/js/vue-spinner.min.js"></script>
 
+<script src="assets/js/helper.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

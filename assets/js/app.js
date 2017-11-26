@@ -1,67 +1,33 @@
-function getTitleCase(str) {
-    var words = str.split(" ");
-    var newStr = "";
-
-    for (var wordKey in words) {
-        var firstLetter = words[wordKey].charAt(0).toUpperCase();
-        var remainder = words[wordKey].slice(1).toLowerCase();
-
-        newStr = newStr.concat((newStr.length > 0 ? " " : ''), firstLetter, remainder);
-    }
-
-    return newStr;
-}
-
 var ScaleLoader = VueSpinner.ScaleLoader;
 
-var Search = Vue.extend({
-    template: '#search-app',
-
-    methods: {
-        onHit:function(item){
-            console.log('ITEM HIT');
-            console.log(item);
-        },
-        prepareResponseData: function(data) {
-            var formattedSearchData = [];
-
-            if (data.hasOwnProperty("items") && items.length > 0) {
-                for (var i=0; i<data.length; i++) {
-                    formattedSearchData[i] = {
-                        name:getTitleCase(data[i].suburb)
-                    };
-                }
-            }
-
-            return formattedSearchData;
-        }
-    }
-});
-
-var vapp = new Vue({
+var properties = new Vue({
     components: {
         'dot-loader':ScaleLoader
     },
-    el: '#search-results',
-    data: {
-        searchResults:[],
-        resultsPage:1,
-        vueReady:true,
-        searchApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/suburbs',
-        propertiesApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/properties'
+    el: '#search-app',
+    data: function(){
+        return {
+            // Search bar - was going to extract to a Vue component but it took too much time, had debugging issues
+            searchApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/suburbs',
+            searchString:'',
+            previousSearchString:'',
+            searchTimeoutId:null,
+            searchTermResults:[],
+            searchActive:false,
+            searchSuggestionsActive:false,
+
+            // Properties
+            searchResults:[],
+            resultsPage:1,
+            vueReady:true,
+            propertiesApiUrl:'https://lh-silver-api-staging.leadhome.co.za/api/properties',
+        };
     },
     created: function(){
         this.getNewResults();
     },
     methods: {
-        getPropertiesNextPageUrl: function () {
-            var vm = this;
-            return vm.propertiesApiUrl + '/?page=' + vm.resultsPage;
-        },
-        getSearchUrl: function (searchTerm) {
-            var vm = this;
-            return vm.searchApiUrl + '/?query=' + searchTerm;
-        },
+        // Properties specific
         loadNextPage: function(e) {
             e.preventDefault();
             this.searchResults = [];
@@ -72,27 +38,86 @@ var vapp = new Vue({
             var vm = this;
             window.scrollTo(0, 0);
 
-            axios.get(this.getPropertiesNextPageUrl())
+            axios.get(vm.getPropertiesNextPageUrl())
                 .then(function (response) {
-                    console.log(response.data.items.length+' items retrieved');
-                    if (response.hasOwnProperty("data") &&
-                        response.data.hasOwnProperty("items")) {
-                        vm.searchResults = response.data.items;
-
-                        console.log(vm.searchResults);
-
-                        vm.resultsPage++;
-                    }
+                    vm.handlePropertiesResponse(response, vm);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        getPropertiesNextPageUrl: function () {
+            var vm = this;
+            return vm.propertiesApiUrl + '/?page=' + vm.resultsPage;
+        },
+        handlePropertiesResponse: function (response, vm) {
+            if (response.hasOwnProperty("data") &&
+                response.data.hasOwnProperty("items")) {
+                vm.searchResults = response.data.items;
+
+                vm.resultsPage++;
+            }
         },
         getItemUrl: function(item) {
             return 'http://leadhome.co.za/property/'+item.id;
         },
         getTitleCase: function(words) {
             return getTitleCase(words);
+        },
+
+        // Search specific
+        resetTimeoutIfNecessary: function (vm) {
+            if (vm.searchTimeoutId != null) {
+                clearTimeout(vm.searchTimeoutId);
+                vm.searchTimeoutId = null;
+            }
+        },
+        getSuburbSearchSuggestionsRequest: function (searchString, vm) {
+            axios.get(vm.getSearchUrl(searchString))
+                .then(function (response) {
+                    if (response.hasOwnProperty("data") &&
+                        response.data.hasOwnProperty("items")) {
+                        var newResults = [];
+
+                        for(var i=0; i<response.data.items.length; i++)
+                        {
+                            newResults[i] = getTitleCase(response.data.items[i].suburb);
+                        }
+
+                        vm.searchTermResults = newResults;
+                    } else {
+                        vm.searchTermResults = [];
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        checkSearchTerms:function(){
+            var vm = this;
+            vm.resetTimeoutIfNecessary(vm);
+
+            if(vm.previousSearchString != vm.searchString && vm.searchString != '')
+            {
+                vm.searchTimeoutId = setTimeout(function () {
+                    vm.getSuburbSearchSuggestionsRequest(vm.searchString, vm);
+                }, 1200);
+            }
+        },
+        getSearchUrl: function (searchTerm) {
+            var vm = this;
+            return vm.searchApiUrl + '/?query=' + searchTerm;
+        },
+        selectSearchSuggestion: function(event) {
+            var suburb = event.target.innerText || event.target.textContent;
+            this.searchString = suburb;
+        },
+        setSearchActive:function(isActive) {
+            var vm = this;
+
+            setTimeout(function(){
+                vm.searchActive = isActive;
+            }, 500);
         }
     }
 });
